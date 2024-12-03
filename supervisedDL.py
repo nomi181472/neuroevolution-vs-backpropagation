@@ -197,6 +197,23 @@ plot_metrics(
     linestyle=['-', '--', ':']
 )
 
+import csv
+metrics_file = "supervisedDL-performance.csv"
+with open(metrics_file, mode="w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Epoch", "Train Loss", "Val Loss", "Test Loss", "Train Acc", "Val Acc", "Test Acc"])
+    for epoch in range(len(best_model_metrics["train_losses"])):
+        writer.writerow([
+            epoch + 1,
+            best_model_metrics["train_losses"][epoch],
+            best_model_metrics["val_losses"][epoch],
+            best_model_metrics["test_losses"][epoch],
+            best_model_metrics["train_accuracies"][epoch],
+            best_model_metrics["val_accuracies"][epoch],
+            best_model_metrics["test_accuracies"][epoch]
+        ])
+print(f"Metrics saved to {metrics_file}")
+
 
 # Reload the best model with its parameters
 input_dim = X.shape[1]
