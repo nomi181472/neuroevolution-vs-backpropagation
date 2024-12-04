@@ -12,6 +12,13 @@ import  pandas as pd
 
 file= "metrics_rl.csv"
 
+columns=["Id","epoch",
+         "parameters","population_size", "algorithm"
+         "best_eval",
+         "mean_eval","median_eval",
+         "pop_best_eval",
+
+                                   ]
 
 def get_df(file,columns):
     df=None
@@ -23,7 +30,7 @@ def get_df(file,columns):
         df.to_csv(file)
     return df
 
-
+global neurons, num_of_layers
 @pass_info
 class LinearPolicy(nn.Module):
     def __init__(
@@ -34,14 +41,36 @@ class LinearPolicy(nn.Module):
             **kwargs  # Anything else that is passed
     ):
         super().__init__()  # Always call super init for nn Modules
-        self.linear1 = nn.Linear(obs_length, obs_length, bias=bias)
-        self.linear2 = nn.Linear(obs_length, act_length, bias=bias)
+
+        layers = []
+        input_size = obs_length
+
+        if num_of_layers == 1:
+            # Directly map input to output without hidden layers
+            layers.append(nn.Linear(input_size, act_length, bias=bias))
+        else:
+            # Add hidden layers
+            for _ in range(num_of_layers - 1):
+                layers.append(nn.Linear(input_size, neurons, bias=bias))
+                layers.append(nn.ReLU())
+                input_size = neurons
+
+            # Add the final output layer
+            layers.append(nn.Linear(input_size, act_length, bias=bias))
+
+        # Register layers as a ModuleList
+        self.layers = nn.ModuleList(layers)
 
     def forward(self, obs: torch.Tensor) -> torch.Tensor:
-        # Forward pass of model simply applies linear layer to observations
-        return self.linear2(self.linear1(obs))
+        # Pass through each layer
+        x = obs
+        for layer in self.layers:
+            x = layer(x)
+        return x
 
-
+# Example usage
+neurons = 10
+num_of_layers = 10
 
 def check_and_create(path):
     if not os.path.exists(path):
@@ -87,27 +116,12 @@ def get_problem(env_name):
     )
 
 
-# Setting up the GymNE problem
-problem = get_problem(env_name)
-
-
 def get_searcher(problem, **kwargs):
     return Cosyne(
 
         problem,
         **kwargs
     )
-
-save_weights_after_iter=200
-searcher = get_searcher(problem,
-                       ** {
-                            "num_elites": 1,
-                            "popsize": 50,
-                            "tournament_size": 10,
-                            "mutation_stdev": 0.3,
-                            "mutation_probability": 0.5,
-                            "permute_all": True,
-                        })
 
 def check_points():
 
@@ -154,36 +168,25 @@ def save_metrics():
     pass
 
 
+# Setting up the GymNE problem
+problem = get_problem(env_name)
+
+
+save_weights_after_iter=20
+searcher = get_searcher(problem,
+                       ** {
+                            "num_elites": 1,
+                            "popsize": 50,
+                            "tournament_size": 10,
+                            "mutation_stdev": 0.3,
+                            "mutation_probability": 0.5,
+                            "permute_all": True,
+                        })
+
+
 
 searcher.after_step_hook.append(save_metrics)
 searcher.before_step_hook.append(check_points)
 
 CSVLogger(searcher)
 searcher.run(1000)
-pop_best = searcher.status['pop_best']
-best_weights = problem.parameterize_net(pop_best.access_values())
-torch.save(best_weights.state_dict(), f"{weights_path}/pop_best.pth")
-
-best = searcher.status['best']
-best_weights = problem.parameterize_net(best.access_values())
-torch.save(best_weights.state_dict(), f"{weights_path}/best.pth")
-
-problem = GymNE(
-    env=env_name,  # ame of the environment
-    network=LinearPolicy,  # Linear policy that we defined earlier
-    network_args={'bias': False},  # Linear policy should not use biases
-    num_actors=4,  # Use 4 available CPUs. You can modify this value, or use 'max' to exploit all available CPUs
-    observation_normalization=False,
-    # Observation normalization was not used in Lunar Lander experiments,render_mode='human'
-)
-
-print('evaluating')
-for i in range(100):
-    best_weights = None
-    if i % 2 == 0:
-        best_weights = searcher.status['best']
-        print('best')
-    else:
-        best_weights = searcher.status['pop_best']
-        print("pop_best")
-    print(problem.visualize(policy=problem.parameterize_net(best_weights), num_episodes=1))
