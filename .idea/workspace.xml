@@ -5,11 +5,142 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12d5defd-f5d1-4f3c-8ad1-07788da3e23b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-0.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-1000.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-10000.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-10100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-10200.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-10300.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-10400.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-10500.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-10600.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-10700.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-10800.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-10900.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-1100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-11000.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-11100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-11200.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-11300.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-11400.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-11500.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-11600.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-11700.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-11800.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-11900.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-1200.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-12000.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-12100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-12200.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-12300.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-12400.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-12500.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-12600.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-1300.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-1400.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-1500.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-1600.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-1700.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-1800.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-1900.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-200.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-2000.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-2100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-2200.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-2300.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-2400.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-2500.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-2600.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-2700.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-2800.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-2900.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-300.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-3000.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-3100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-3200.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-3300.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-3400.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-3500.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-3600.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-3700.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-3800.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-3900.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-400.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-4000.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-4100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-4200.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-4300.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-4400.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-4500.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-4600.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-4700.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-4800.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-4900.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-500.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-5000.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-5100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-5200.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-5300.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-5400.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-5500.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-5600.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-5700.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-5800.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-5900.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-600.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-6000.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-6100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-6200.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-6300.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-6400.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-6500.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-6600.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-6700.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-6800.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-6900.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-700.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-7000.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-7100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-7200.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-7300.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-7400.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-7500.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-7600.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-7700.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-7800.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-7900.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-800.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-8000.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-8100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-8200.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-8300.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-8400.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-8500.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-8600.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-8700.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-8800.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-8900.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-900.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-9000.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-9100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-9200.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-9300.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-9400.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-9500.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-9600.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-9700.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-9800.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/LunarLander-v3/videos/rl-video-episode-9900.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/folder_name/videos/rl-video-episode-0.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/folder_name/videos/rl-video-episode-100.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/folder_name/videos/rl-video-episode-200.mp4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cosyne_neuro.py" beforeDir="false" afterPath="$PROJECT_DIR$/cosyne_neuro.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/status_log.csv" beforeDir="false" afterPath="$PROJECT_DIR$/status_log.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/supervisedneuroevolution.py" beforeDir="false" afterPath="$PROJECT_DIR$/supervisedneuroevolution.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,26 +166,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.__init__.executor": "Run",
-    "Python.core.executor": "Debug",
-    "Python.cosyne.executor": "Debug",
-    "Python.cosyne_neuro.executor": "Run",
-    "Python.custom_logger.executor": "Run",
-    "Python.hook.executor": "Debug",
-    "Python.main.executor": "Run",
-    "Python.real.executor": "Run",
-    "Python.registration.executor": "Run",
-    "Python.searchalgorithm.executor": "Debug",
-    "Python.supervisedneuroevolution.executor": "Run",
-    "Python.test_env.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/education/thesis/Need"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.core.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.cosyne.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.cosyne_neuro.executor&quot;: &quot;Run&quot;,
+    &quot;Python.custom_logger.executor&quot;: &quot;Run&quot;,
+    &quot;Python.hook.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.real.executor&quot;: &quot;Run&quot;,
+    &quot;Python.registration.executor&quot;: &quot;Run&quot;,
+    &quot;Python.searchalgorithm.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.supervisedneuroevolution.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_env.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/education/thesis/Need&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\education\thesis\Need\" />

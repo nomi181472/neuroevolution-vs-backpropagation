@@ -2,3 +2,6 @@
 /.virtual_documents/
 /data/LunarLander-v3/weights/
 *.pth
+/data/LunarLander-v3/videos/
+*.mp4
+/data/LunarLander-v3/videos.zip

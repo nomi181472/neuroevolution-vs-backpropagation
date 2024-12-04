@@ -8,13 +8,20 @@ from evotorch.neuroevolution import GymNE
 from custom_logger import CSVLogger
 from evotorch.algorithms import Cosyne
 import gymnasium as gym
+import  pandas as pd
 
-from src.evotorch import SolutionBatch
+file= "metrics_rl.csv"
 
 
-# The decorator `@pass_info` tells the problem class `GymNE`
-# to pass information regarding the gym environment via keyword arguments
-# such as `obs_length` and `act_length`.
+def get_df(file,columns):
+    df=None
+    if os.path.exists(file):
+        df = pd.read_csv(file, index_col=0)
+
+    else:
+        df = pd.DataFrame(columns=columns)
+        df.to_csv(file)
+    return df
 
 
 @pass_info
@@ -34,7 +41,7 @@ class LinearPolicy(nn.Module):
         # Forward pass of model simply applies linear layer to observations
         return self.linear2(self.linear1(obs))
 
-#env = gym.wrappers.RecordVideo(env, "videos/", episode_trigger=lambda x: x % 10 == 0)
+
 
 def check_and_create(path):
     if not os.path.exists(path):
@@ -65,9 +72,14 @@ check_and_create(weights_path)
 
 
 def get_problem(env_name):
+    def create_env():
+        env = gym.make(env_name, render_mode="rgb_array")
+        # Wrap the environment with RecordVideo
+        env = gym.wrappers.RecordVideo(env, f"{folder_name}/videos", episode_trigger=lambda x: x % 100 == 0)
+        return env
     return GymNE(
 
-        env=env_name,  # ame of the environment
+        env=create_env,  # ame of the environment
         network=LinearPolicy,  # Linear policy that we defined earlier
         network_args={'bias': False},  # Linear policy should not use biases
         num_actors=4,  # Use 4 available CPUs. You can modify this value, or use 'max' to exploit all available CPUs
@@ -86,11 +98,11 @@ def get_searcher(problem, **kwargs):
         **kwargs
     )
 
-save_weights_after_iter=300
+save_weights_after_iter=200
 searcher = get_searcher(problem,
                        ** {
                             "num_elites": 1,
-                            "popsize": 200,
+                            "popsize": 50,
                             "tournament_size": 10,
                             "mutation_stdev": 0.3,
                             "mutation_probability": 0.5,
@@ -115,7 +127,7 @@ def check_points():
             current_score = current_status[metric_name]
 
 
-            solution = searcher.status[sol_name]
+            solution = current_status[sol_name]
             best_policy = problem.parameterize_net(solution.access_values())
             path=f"{weights_path}/{metric_name}"
             check_and_create(path)
