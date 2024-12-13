@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12d5defd-f5d1-4f3c-8ad1-07788da3e23b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/status_log_lunar_lander.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_env_half_cheetah.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_env_neuro.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cosyne_neuro.py" beforeDir="false" afterPath="$PROJECT_DIR$/cosyne_neuro.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/status_log.csv" beforeDir="false" afterPath="$PROJECT_DIR$/status_log.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/lunar_lander.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +31,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../../anaconda/envs/Need/Lib/site-packages/evotorch/neuroevolution/gymne.py" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -33,31 +43,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.__init__.executor": "Run",
-    "Python.core.executor": "Debug",
-    "Python.cosyne.executor": "Debug",
-    "Python.cosyne_neuro.executor": "Run",
-    "Python.custom_logger.executor": "Run",
-    "Python.decorators.executor": "Run",
-    "Python.hook.executor": "Debug",
-    "Python.main.executor": "Run",
-    "Python.real.executor": "Run",
-    "Python.registration.executor": "Run",
-    "Python.searchalgorithm.executor": "Debug",
-    "Python.supervisedneuroevolution.executor": "Run",
-    "Python.test_env.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/education/thesis/Need"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.core.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.cosyne.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.cosyne_neuro.executor&quot;: &quot;Run&quot;,
+    &quot;Python.custom_logger.executor&quot;: &quot;Run&quot;,
+    &quot;Python.decorators.executor&quot;: &quot;Run&quot;,
+    &quot;Python.hook.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.real.executor&quot;: &quot;Run&quot;,
+    &quot;Python.registration.executor&quot;: &quot;Run&quot;,
+    &quot;Python.searchalgorithm.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.supervisedneuroevolution.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_env.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/education/thesis/Need&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\education\thesis\Need\" />
       <recent name="D:\education\thesis\Need" />
+      <recent name="D:\education\thesis\Need\" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\education\thesis\Need" />
@@ -90,8 +100,8 @@
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/test_env.py</url>
-          <line>28</line>
+          <url>file://$PROJECT_DIR$/test_env_neuro.py</url>
+          <line>53</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -100,9 +110,14 @@
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/supervisedneuroevolution.py</url>
-          <line>228</line>
-          <option name="timeStamp" value="20" />
+          <url>file://$PROJECT_DIR$/../../../anaconda/envs/Need/Lib/site-packages/evotorch/algorithms/distributed/gaussian.py</url>
+          <line>745</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cosyne_neuro.py</url>
+          <line>53</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

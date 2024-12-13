@@ -6,10 +6,11 @@ from evotorch.neuroevolution import GymNE
 #from evotorch.logging import StdOutLogger
 from custom_logger import CSVLogger
 from evotorch.algorithms import Cosyne
-env_name='LunarLander-v3'
+env_name='HalfCheetah-v5'
 test_env = gym.make(env_name,render_mode='human')
 
 
+global neurons, num_of_layers,pop_size,algorithm,epochs,epoch,parameters
 @pass_info
 class LinearPolicy(nn.Module):
     def __init__(
@@ -20,13 +21,37 @@ class LinearPolicy(nn.Module):
             **kwargs  # Anything else that is passed
     ):
         super().__init__()  # Always call super init for nn Modules
-        self.linear1 = nn.Linear(obs_length, obs_length, bias=bias)
-        self.linear2 = nn.Linear(obs_length, act_length, bias=bias)
+
+        layers = []
+        input_size = obs_length
+
+
+        if num_of_layers == 1:
+            # Directly map input to output without hidden layers
+            layers.append(nn.Linear(input_size, act_length, bias=bias))
+        else:
+            # Add hidden layers
+            for _ in range(num_of_layers - 1):
+                layers.append(nn.Linear(input_size, neurons, bias=bias))
+                layers.append(nn.ReLU())
+                input_size = neurons
+
+            # Add the final output layer
+            layers.append(nn.Linear(input_size, act_length, bias=bias))
+
+        # Register layers as a ModuleList
+        self.layers = nn.ModuleList(layers)
 
     def forward(self, obs: torch.Tensor) -> torch.Tensor:
-        # Forward pass of model simply applies linear layer to observations
-        return self.linear2(self.linear1(obs))
+        # Pass through each layer
+        x = obs
+        for layer in self.layers:
+            x = layer(x)
+        return x
 
+# Example usage
+neurons = 10
+num_of_layers = 1
 
 
 actions=4
