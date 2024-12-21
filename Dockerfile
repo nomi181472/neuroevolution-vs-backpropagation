@@ -12,10 +12,12 @@ RUN pip install --upgrade pip
 
 # Copy the first requirements file and install dependencies
 COPY requirements.txt .
-RUN pip install -r requirements.txt --verbose
+
+RUN pip install --default-timeout=1000000 -r requirements.txt --verbose
+
 
 # Copy the application code
 COPY . .
 
 # Define the command to run the application
-CMD ["python", "./cosyne_neuro.py"]
+#CMD ["python", "./cosyne_neuro.py"]

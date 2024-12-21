@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12d5defd-f5d1-4f3c-8ad1-07788da3e23b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/status_log_lunar_lander.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_env_half_cheetah.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_env_neuro.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cosyne_neuro.py" beforeDir="false" afterPath="$PROJECT_DIR$/cosyne_neuro.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/status_log.csv" beforeDir="false" afterPath="$PROJECT_DIR$/status_log.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/lunar_lander.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

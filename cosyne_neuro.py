@@ -93,11 +93,12 @@ neurons = 10
 num_of_layers = 1
 
 def check_and_create(path):
+    print(f"creating:{path}")
     if not os.path.exists(path):
         os.mkdir(path)
 
 env_name = 'Swimmer-v5'
-
+check_and_create("data")
 folder_name = f"./data/{env_name}"
 check_and_create(folder_name)
 weights_path = f"{folder_name}/weights"
