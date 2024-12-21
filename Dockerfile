@@ -13,6 +13,9 @@ RUN pip install --upgrade pip
 # Copy the first requirements file and install dependencies
 COPY requirements.txt .
 
+RUN pip install --default-timeout=1000000 -r baseline_requirements.txt --verbose
+
+
 RUN pip install --default-timeout=1000000 -r requirements.txt --verbose
 
 

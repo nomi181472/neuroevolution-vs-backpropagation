@@ -135,7 +135,7 @@ def get_problem(env_name):
         env=create_env,  # ame of the environment
         network=LinearPolicy,  # Linear policy that we defined earlier
         network_args={'bias': False},  # Linear policy should not use biases
-        num_actors=4,  # Use 4 available CPUs. You can modify this value, or use 'max' to exploit all available CPUs
+        num_actors='max',  # Use 4 available CPUs. You can modify this value, or use 'max' to exploit all available CPUs
         observation_normalization=True,  # Observation normalization was not used in Lunar Lander experiments
     )
 
