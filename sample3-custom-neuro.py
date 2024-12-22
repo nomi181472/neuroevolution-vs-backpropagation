@@ -5,13 +5,15 @@ from src.evotorch.neuroevolution import GymNE
 import gymnasium as gym
 # Specialized Problem class for RL
 
-def get_problem(env_name,path_video):
+def get_problem(env_name,path_video,isRecord=False):
     def create_env():
-        env = gym.make(env_name, render_mode="rgb_array",)
-
-        # Wrap the environment with RecordVideo
-    
-        env = gym.wrappers.RecordVideo(env, path_video, episode_trigger=lambda x: x % 10 == 0)
+        env:gym.Env
+        if isRecord:
+            env=gym.make(env_name)
+        else:
+            env = gym.make(env_name, render_mode="rgb_array",)
+            # Wrap the environment with RecordVideo
+            env = gym.wrappers.RecordVideo(env, path_video, episode_trigger=lambda x: x % 100 == 0)
         return env
     return GymNE(
 
@@ -39,4 +41,4 @@ searcher.run(10)
 
 population_center = searcher.status["center"]
 policy = problem.to_policy(population_center)
-print(problem.visualize(policy))
+problem.visualize(policy)

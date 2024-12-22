@@ -19,8 +19,8 @@ RUN pip install --default-timeout=1000000 -r baseline_requirements.txt --verbose
 FROM base-stage as final-stage
 
 # Copy the rest of the requirements and install
-#COPY requirements.txt .
-#RUN pip install --default-timeout=1000000 -r requirements.txt --verbose
+COPY requirements.txt .
+RUN pip install --default-timeout=1000000 -r requirements.txt --verbose
 
 # Copy the application code
 COPY . .
