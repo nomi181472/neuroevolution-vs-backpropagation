@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  evotoch-sample:
+    image: docker.io/nomi173652/evotoch-sample
+    container_name: evotoch_sample_container
+    volumes:
+      - ./data2:/data2
+    shm_size: '3g'
+    mem_limit: 14g
+    command: ["python", "./sample2-record.py"]
+

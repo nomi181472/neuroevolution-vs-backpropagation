@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12d5defd-f5d1-4f3c-8ad1-07788da3e23b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/sample3-custom-neuro.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile.new" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile.new" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample2-record.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample2-record.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample3-custom-neuro.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample3-custom-neuro.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

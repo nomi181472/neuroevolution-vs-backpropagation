@@ -1,17 +1,17 @@
-from src.evotorch.algorithms import PGPE
+from src.evotorch.algorithms import Cosyne
 from src.evotorch.logging import StdOutLogger
 from src.evotorch.neuroevolution import GymNE
 
 import gymnasium as gym
 # Specialized Problem class for RL
-
+print("video records")
 def get_problem(env_name,path_video):
     def create_env():
         env = gym.make(env_name, render_mode="rgb_array",)
 
         # Wrap the environment with RecordVideo
-    
-        env = gym.wrappers.RecordVideo(env, path_video, episode_trigger=lambda x: x % 10 == 0)
+        print("Configuring record video wrapper")
+        env = gym.wrappers.RecordVideo(env,video_folder=path_video, episode_trigger=lambda x:True)
         return env
     return GymNE(
 
@@ -22,21 +22,28 @@ def get_problem(env_name,path_video):
         observation_normalization=True,  # Observation normalization was not used in Lunar Lander experiments
     )
 
-problem =get_problem("Humanoid-v4","./data")
+problem =get_problem("LunarLander-v3","./data2")
 
-searcher = PGPE(
-    problem,
-    popsize=200,
-    center_learning_rate=0.01125,
-    stdev_learning_rate=0.1,
-    optimizer_config={"max_speed": 0.015},
-    radius_init=0.27,
-    num_interactions=150000,
-    popsize_max=3200,
-)
+
+
+
+print("problem is created")
+searcher = Cosyne(
+
+                problem,
+                popsize=6,
+    **{
+        "num_elites": 1,
+
+        "tournament_size": 10,
+        "mutation_stdev": 0.3,
+        "mutation_probability": 0.5,
+        "permute_all": True,
+    }
+            )
 logger = StdOutLogger(searcher)
-searcher.run(10)
-
-population_center = searcher.status["center"]
+print("Algorithm added")
+searcher.run(1000)
+print("Iteration completed")
+population_center = searcher.status["best"]
 policy = problem.to_policy(population_center)
-print(problem.visualize(policy))

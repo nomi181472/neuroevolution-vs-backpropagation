@@ -1,10 +1,30 @@
 from src.evotorch.algorithms import PGPE
 from src.evotorch.logging import StdOutLogger
 from src.evotorch.neuroevolution import GymNE
-
+import os
 import gymnasium as gym
 # Specialized Problem class for RL
+# Function to evaluate the policy and save video with iteration number
+def evaluate_and_record(policy, env_name, save_path, iteration):
+    # Create a unique directory for each iteration
+    iteration_path = os.path.join(save_path, f"iteration_{iteration}")
+    os.makedirs(iteration_path, exist_ok=True)
 
+    # Wrap the environment with RecordVideo
+    env = gym.make(env_name, render_mode="rgb_array")
+    env = gym.wrappers.RecordVideo(env, iteration_path, episode_trigger=lambda _: True)  # Always save this episode
+    obs,_ = env.reset()
+    total_reward = 0
+    done = False
+
+    while not done:
+        action = policy(obs)
+        obs, reward, done, info,_ = env.step(action)
+        total_reward += reward
+
+    env.close()
+    return total_reward
+    
 def get_problem(env_name,path_video,isRecord=False):
     def create_env():
         env:gym.Env
