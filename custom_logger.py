@@ -1,10 +1,11 @@
 import csv
 import os
-from evotorch.logging import Logger
+from src.evotorch.logging import Logger
+from src.evotorch.algorithms import SearchAlgorithm
 
 
 class CSVLogger(Logger):
-    def __init__(self, searcher, filename='status_log.csv'):
+    def __init__(self, searcher: SearchAlgorithm, filename='status_log.csv'):
         super().__init__(searcher)
         self.filename = filename
         if os.path.exists(filename):
@@ -29,6 +30,7 @@ class CSVLogger(Logger):
             'total_episode_count': status['total_episode_count']
         }
         print(data)
+        print()
         with open(self.filename, 'a', newline='') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=self.fieldnames)
             writer.writerow(data)

@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12d5defd-f5d1-4f3c-8ad1-07788da3e23b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/sample3-modular.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample2-record.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample2-record.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_logger.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample3-custom-neuro.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample3-custom-neuro.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/status_log.csv" beforeDir="false" afterPath="$PROJECT_DIR$/status_log.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +50,7 @@
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;Python.real.executor&quot;: &quot;Run&quot;,
     &quot;Python.registration.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sample3-custom-neuro.executor&quot;: &quot;Run&quot;,
     &quot;Python.searchalgorithm.executor&quot;: &quot;Debug&quot;,
     &quot;Python.supervisedneuroevolution.executor&quot;: &quot;Run&quot;,
     &quot;Python.test_env.executor&quot;: &quot;Run&quot;,
