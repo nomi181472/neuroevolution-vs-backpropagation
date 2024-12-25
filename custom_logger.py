@@ -30,8 +30,8 @@ class CSVLogger(Logger):
             'total_interaction_count': status['total_interaction_count'],
             'total_episode_count': status['total_episode_count']
         }
-        print(data)
-        print()
+        #print(data)
+        #print()
         with open(self.filename, 'a', newline='') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=self.fieldnames)
             writer.writerow(data)

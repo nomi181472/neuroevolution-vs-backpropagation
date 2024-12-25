@@ -41,6 +41,7 @@ class Need(SearchAlgorithm, SinglePopulationAlgorithmMixin):
         elitism_ratio: Optional[float] = None,
         eta: Optional[float] = None,
         num_children: Optional[int] = None,
+        n_ensemble: int = 5,
     ):
         """
         `__init__(...)`: Initialize the Cosyne instance.
@@ -122,7 +123,8 @@ class Need(SearchAlgorithm, SinglePopulationAlgorithmMixin):
         self.reward_tracker = {i: [] for i in range(popsize)}  # Initialize reward tracker
         self._population = SolutionBatch(problem, device=problem.device, popsize=self._popsize)
         self._first_generation: bool = True
-
+        self.n_ensemble=n_ensemble
+        self.ensembled_models=[]
         # GAStatusMixin.__init__(self)
         SinglePopulationAlgorithmMixin.__init__(self)
 
@@ -160,12 +162,20 @@ class Need(SearchAlgorithm, SinglePopulationAlgorithmMixin):
 
 
         self._population = extended_population.take_best(self._popsize)
+
+        self.ensembled_models =self.get_ensembled_models(
+            self.get_best_population(self.n_ensemble)
+        )
     def get_best_population(self,n:int)->SolutionBatch:
         return self._population.take_best(n)
-    def get_ensembled_models(self,n:int,)->nn.Module:
-        decisions=[]
-        for sol in self.get_best_population(n):
+    def get_ensembled_models(self,solultions:SolutionBatch)->[nn.Module]:
+        models=[]
+
+        for sol in solultions:
             model=self.problem.parameterize_net(sol.access_values())
+            models.append(model)
+        return models
+
 
 
 

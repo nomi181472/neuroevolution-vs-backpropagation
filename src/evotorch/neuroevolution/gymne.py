@@ -376,7 +376,7 @@ class GymNE(NEProblem):
         policy.reset()
 
         if visualize:
-            env = self._instantiate_new_env(render_mode="human")
+            env = self._instantiate_new_env()
         else:
             env = self._get_env()
 

@@ -2,13 +2,13 @@ import os
 import copy
 import gymnasium as gym
 import torch
-from src.evotorch.algorithms import Cosyne
+from need import Need
 from src.evotorch.logging import StdOutLogger
 from src.evotorch.neuroevolution import GymNE
 from custom_logger import CSVLogger
 from evotorch.decorators import pass_info
 from torch import nn
-from ensemble_model import Ensemble
+from ensemble_model import  Ensemble
 
 num_of_layers=2
 neurons=8
@@ -67,11 +67,25 @@ class RLTrainer:
         self.weights_path = f"{self.folder_name}/weights"
         self._initialize_directories()
         self.problem = self._create_problem(env_name)
+        self.problem.after_eval_hook.append(self.run_ensemble)
         self.searcher = self._create_searcher()
         self.searcher.before_step_hook.append(self.check_metrics)
-        #self.logger = StdOutLogger(self.searcher)
+        self.logger = StdOutLogger(self.searcher)
         self.csvlogg = CSVLogger(self.searcher,self.folder_name)
+        self.current_iteration=0
+    def run_ensemble(self,status):
+        try:
+            models = self.searcher.ensembled_models
+            if (len(models)) > 0:
 
+                policy = Ensemble(models)
+                reward = self.evaluate_and_record(policy, f"{self.folder_name}/ensemble_records", self.current_iteration)
+                reward2=self.problem.visualize(policy)
+                print(reward2)
+                return {"ensembled": reward,"ensembled_builten":reward2}
+        except Exception as e:
+            print(f"ensemble failed {e}")
+        return {"ensembled": 0,"ensembled_builten":0}
     def _initialize_directories(self):
         """Create necessary directories for saving weights and videos."""
         self._check_and_create("data")
@@ -100,7 +114,7 @@ class RLTrainer:
 
     def _create_searcher(self):
         """Create the evolutionary searcher with Cosyne."""
-        return Cosyne(
+        return Need(
             self.problem,
             popsize=100,
             num_elites=1,
@@ -109,8 +123,8 @@ class RLTrainer:
             mutation_probability=0.5,
             permute_all=True,
         )
-
-    def evaluate_and_record(self, policy, save_path, iteration):
+    @torch.no_grad()
+    def evaluate_and_record(self, policy, save_path, iteration)->float:
         """Evaluate the policy and save video with iteration number."""
 
         iteration_path = os.path.join(f"{save_path}/iterations", f"iteration_{iteration}")
@@ -118,6 +132,7 @@ class RLTrainer:
 
         env = gym.make(self.env_name, render_mode="rgb_array")
         env = gym.wrappers.RecordVideo(env, iteration_path, episode_trigger=lambda _=iteration: True)
+        total_rewards=[]
         repeat:int=3
         while repeat >0:
             repeat=repeat-1
@@ -133,10 +148,10 @@ class RLTrainer:
                 obs = torch.from_numpy(obs)
                 total_reward += reward
                 steps += 1
-
+            total_rewards.append((total_reward))
         env.close()
 
-        return 100
+        return max(total_rewards)
 
     def save_weights_based_on_metrics(self, metric_name, sol_name, current_status):
         """Save weights based on specific metrics."""
@@ -154,12 +169,14 @@ class RLTrainer:
             print(f"Saved weights to {file_name}")
 
     def check_metrics(self):
+        iteration=0
         """Check and update metrics after each iteration."""
         try:
             current_status = copy.deepcopy(self.searcher.status)
             if "iter" not in current_status:
                 return
             iteration = current_status['iter']
+            self.current_iteration=iteration
             if iteration < self.save_weights_after_iter:
                 return
 
@@ -174,6 +191,7 @@ class RLTrainer:
         except Exception as e:
             print(f"Exception occurred: {e}")
 
+
     def train(self, num_iterations):
         """Run the evolutionary search process."""
         print("Starting training...")
@@ -185,6 +203,6 @@ class RLTrainer:
 
 if __name__ == "__main__":
     # Training setup
-    trainer = RLTrainer(env_name="LunarLander-v3", save_weights_after_iter=2)
+    trainer = RLTrainer(env_name="LunarLander-v3", save_weights_after_iter=30)
     final_policy = trainer.train(num_iterations=300)
     print("Training completed.")

@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12d5defd-f5d1-4f3c-8ad1-07788da3e23b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/custom_solution_batch.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/need.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sample3-custom.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ensemble_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sample4-ensemble.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cosyne_neuro.py" beforeDir="false" afterPath="$PROJECT_DIR$/cosyne_neuro.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/custom_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/LunarLander-v3/status_log.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/LunarLander-v3/status_log.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/need.py" beforeDir="false" afterPath="$PROJECT_DIR$/need.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample3-modular.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample3-modular.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/status_log.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/evotorch/neuroevolution/gymne.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/evotorch/neuroevolution/gymne.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,11 +58,12 @@
     "Python.sample3-custom-neuro.executor": "Run",
     "Python.sample3-custom.executor": "Debug",
     "Python.sample3-modular.executor": "Debug",
+    "Python.sample4-ensemble.executor": "Debug",
     "Python.searchalgorithm.executor": "Debug",
     "Python.supervisedneuroevolution.executor": "Run",
     "Python.test_env.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "ensemble__approach",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "D:/education/thesis/Need"
   }
@@ -117,6 +117,11 @@
           <url>file://$PROJECT_DIR$/cosyne_neuro.py</url>
           <line>54</line>
           <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/need.py</url>
+          <line>169</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
