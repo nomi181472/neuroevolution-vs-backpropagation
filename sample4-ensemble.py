@@ -122,7 +122,7 @@ class RLTrainer:
             mutation_stdev=0.3,
             mutation_probability=0.5,
             permute_all=True,
-            n_ensemble=1
+            n_ensemble=5
 
         )
     @torch.no_grad()

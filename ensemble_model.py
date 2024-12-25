@@ -9,19 +9,25 @@ class Ensemble(nn.Module):
         self.models = nn.ModuleList(models)
 
     def forward(self, x):
-        # Get predictions from each model
         outputs = [model(x) for model in self.models]
 
-        # Apply softmax to get probabilities (assuming the models are classification models)
-        outputs = [torch.softmax(output, dim=0) for output in outputs]
+        to_return = x
+        map = dict()
+        for idx, y_hat in enumerate(outputs):
 
-        # Get predicted class labels for each model
-        preds = [output.argmax(dim=0) for output in outputs]
+            action = torch.argmax(y_hat).item()
+            if action in map:
+                map[action] = (idx, map[action][-1] + 1)
+            else:
+                map[action] = (idx, 1)
+                # Find the action with the highest count (i.e., most votes)
+        highest_same_action = max(map.items(), key=lambda x: x[1][-1])  # Get the action with max votes
 
-        # Stack the predictions to create a tensor of shape (num_models, batch_size)
-        preds = torch.stack(preds, dim=0)
+        # Get the model index with the most votes for the action
+        highest_same_action_idx = highest_same_action[1][0]
+        return outputs[highest_same_action_idx]
 
-        # Perform majority voting along the model dimension
-        majority_preds = torch.mode(preds, dim=0)[0]  # Mode along the model dimension
+        # Get predictions from each model
 
-        return majority_preds
+
+

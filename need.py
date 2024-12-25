@@ -168,13 +168,13 @@ class Need(SearchAlgorithm, SinglePopulationAlgorithmMixin):
         )
     def get_best_population(self,n:int)->SolutionBatch:
         return self._population.take_best(n)
-    def get_ensembled_models(self,solultions:SolutionBatch)->[nn.Module]:
+    def get_ensembled_models(self,solultions:SolutionBatch)->nn.ModuleList:
         models=[]
 
         for sol in solultions:
             model=self.problem.parameterize_net(sol.access_values())
             models.append(model)
-        return models
+        return nn.ModuleList(models)
 
 
 
