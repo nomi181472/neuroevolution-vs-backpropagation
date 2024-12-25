@@ -82,10 +82,10 @@ class RLTrainer:
                 reward = self.evaluate_and_record(policy, f"{self.folder_name}/ensemble_records", self.current_iteration)
                 reward2=self.problem.visualize(policy)
                 print(reward2)
-                return {"ensembled": reward,"ensembled_builten":reward2}
+                return {"ensembled": reward,**reward2}
         except Exception as e:
             print(f"ensemble failed {e}")
-        return {"ensembled": 0,"ensembled_builten":0}
+        return {"ensembled": 0}
     def _initialize_directories(self):
         """Create necessary directories for saving weights and videos."""
         self._check_and_create("data")
@@ -117,11 +117,13 @@ class RLTrainer:
         return Need(
             self.problem,
             popsize=100,
-            num_elites=1,
+            num_elites=4,
             tournament_size=10,
             mutation_stdev=0.3,
             mutation_probability=0.5,
             permute_all=True,
+            n_ensemble=1
+
         )
     @torch.no_grad()
     def evaluate_and_record(self, policy, save_path, iteration)->float:
