@@ -158,7 +158,7 @@ class RLTrainer:
 
     def save_weights_based_on_metrics(self, metric_name, sol_name, current_status):
         """Save weights based on specific metrics."""
-        if metric_name in current_status and current_status[metric_name] >= self.metrics[metric_name]:
+        if metric_name in current_status and current_status[metric_name] > self.metrics[metric_name]:
             current_score = current_status[metric_name]
             solution = current_status[sol_name]
             best_policy = self.problem.parameterize_net(solution.access_values())
