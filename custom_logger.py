@@ -5,9 +5,10 @@ from src.evotorch.algorithms import SearchAlgorithm
 
 
 class CSVLogger(Logger):
-    def __init__(self, searcher: SearchAlgorithm, filename='status_log.csv'):
+    def __init__(self, searcher: SearchAlgorithm,path='data', filename='status_log.csv'):
         super().__init__(searcher)
-        self.filename = filename
+        os.makedirs(path, exist_ok=True)
+        self.filename =os.path.join( path,filename)
         if os.path.exists(filename):
             os.remove(filename)  # Remove existing file if it exists
         self.fieldnames = [

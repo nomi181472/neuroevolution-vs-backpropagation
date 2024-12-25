@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12d5defd-f5d1-4f3c-8ad1-07788da3e23b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/sample3-modular.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/custom_solution_batch.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/need.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sample3-custom.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cosyne_neuro.py" beforeDir="false" afterPath="$PROJECT_DIR$/cosyne_neuro.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/custom_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample3-custom-neuro.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample3-custom-neuro.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/status_log.csv" beforeDir="false" afterPath="$PROJECT_DIR$/status_log.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample3-modular.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample3-modular.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/status_log.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,28 +42,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
-    &quot;Python.core.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.cosyne.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.cosyne_neuro.executor&quot;: &quot;Run&quot;,
-    &quot;Python.custom_logger.executor&quot;: &quot;Run&quot;,
-    &quot;Python.decorators.executor&quot;: &quot;Run&quot;,
-    &quot;Python.hook.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.real.executor&quot;: &quot;Run&quot;,
-    &quot;Python.registration.executor&quot;: &quot;Run&quot;,
-    &quot;Python.sample3-custom-neuro.executor&quot;: &quot;Run&quot;,
-    &quot;Python.searchalgorithm.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.supervisedneuroevolution.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_env.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/education/thesis/Need&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.__init__.executor": "Run",
+    "Python.core.executor": "Debug",
+    "Python.cosyne.executor": "Debug",
+    "Python.cosyne_neuro.executor": "Run",
+    "Python.custom_logger.executor": "Run",
+    "Python.decorators.executor": "Run",
+    "Python.ga.executor": "Run",
+    "Python.hook.executor": "Debug",
+    "Python.main.executor": "Run",
+    "Python.need.executor": "Debug",
+    "Python.real.executor": "Run",
+    "Python.registration.executor": "Run",
+    "Python.sample3-custom-neuro.executor": "Run",
+    "Python.sample3-custom.executor": "Debug",
+    "Python.sample3-modular.executor": "Debug",
+    "Python.searchalgorithm.executor": "Debug",
+    "Python.supervisedneuroevolution.executor": "Run",
+    "Python.test_env.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/education/thesis/Need"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\education\thesis\Need" />
@@ -106,13 +114,8 @@
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../../../anaconda/envs/Need/Lib/site-packages/evotorch/algorithms/distributed/gaussian.py</url>
-          <line>745</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/cosyne_neuro.py</url>
-          <line>53</line>
+          <line>54</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>

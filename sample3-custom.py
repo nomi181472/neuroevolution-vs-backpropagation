@@ -2,7 +2,7 @@ import os
 import copy
 import gymnasium as gym
 import torch
-from src.evotorch.algorithms import Cosyne
+from need import Need
 from src.evotorch.logging import StdOutLogger
 from src.evotorch.neuroevolution import GymNE
 from custom_logger import CSVLogger
@@ -99,7 +99,7 @@ class RLTrainer:
 
     def _create_searcher(self):
         """Create the evolutionary searcher with Cosyne."""
-        return Cosyne(
+        return Need(
             self.problem,
             popsize=100,
             num_elites=1,

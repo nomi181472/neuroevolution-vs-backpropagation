@@ -1,8 +1,9 @@
 import os.path
 import copy
 import torch
-from torch import nn
+
 from evotorch.decorators import pass_info
+from torch import nn
 from evotorch.neuroevolution import GymNE
 from evotorch.logging import PandasLogger, StdOutLogger
 #from evotorch.logging import StdOutLogger
