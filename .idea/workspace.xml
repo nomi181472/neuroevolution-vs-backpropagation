@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="12d5defd-f5d1-4f3c-8ad1-07788da3e23b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/LunarLander-v3/status_log.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/LunarLander-v3/status_log.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ensemble_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/ensemble_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/need.py" beforeDir="false" afterPath="$PROJECT_DIR$/need.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample4-ensemble.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample4-ensemble.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +43,7 @@
     "Python.cosyne_neuro.executor": "Run",
     "Python.custom_logger.executor": "Run",
     "Python.decorators.executor": "Run",
-    "Python.ensemble_model.executor": "Debug",
+    "Python.ensemble_model.executor": "Run",
     "Python.ga.executor": "Run",
     "Python.hook.executor": "Debug",
     "Python.main.executor": "Run",
@@ -122,14 +119,9 @@
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/sample4-ensemble.py</url>
-          <line>80</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/need.py</url>
-          <line>173</line>
-          <option name="timeStamp" value="44" />
+          <line>176</line>
+          <option name="timeStamp" value="45" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

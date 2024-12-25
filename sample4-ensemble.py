@@ -3,6 +3,7 @@ import copy
 import gymnasium as gym
 import torch
 from need import Need
+from src.evotorch.algorithms import GeneticAlgorithm
 from src.evotorch.logging import StdOutLogger
 from src.evotorch.neuroevolution import GymNE
 from custom_logger import CSVLogger
@@ -81,7 +82,7 @@ class RLTrainer:
                 policy = Ensemble(models)
                 reward = self.evaluate_and_record(policy, f"{self.folder_name}/ensemble_records", self.current_iteration)
                 reward2=self.problem.visualize(policy)
-                print(reward2)
+
                 return {"ensembled": reward,**reward2}
         except Exception as e:
             print(f"ensemble failed {e}")
