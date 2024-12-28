@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12d5defd-f5d1-4f3c-8ad1-07788da3e23b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/sample5-ga.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +58,7 @@
     "Python.supervisedneuroevolution.executor": "Run",
     "Python.test_env.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "ensemble__approach",
+    "git-widget-placeholder": "ga__sol",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "D:/education/thesis/Need"
   }
