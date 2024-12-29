@@ -2,6 +2,7 @@ import os
 import copy
 import gymnasium as gym
 import torch
+import time
 from torch import nn
 import random
 import numpy as np
@@ -11,7 +12,8 @@ from src.evotorch.logging import StdOutLogger
 from src.evotorch.neuroevolution import GymNE
 from evotorch.decorators import pass_info
 from custom_logger import CSVLogger
-from custom_operators import CustomTournamentSelection, MultiPointCrossOver
+from src.evotorch.operators import GaussianMutation
+from custom_operators import GreedyCrossover, MultiPointCrossOver
 from src.evotorch.operators import TwoPointCrossOver
 from ensemble_model import Ensemble
 
@@ -110,7 +112,8 @@ class RLTrainer:
         return NeedGA(
             self.problem,
             operators=[
-                MultiPointCrossOver(problem=self.problem,tournament_size=10,num_points=5),
+                GreedyCrossover(problem=self.problem,top_n=3,num_children=40,),
+                GaussianMutation(problem=self.problem, stdev=0.1, mutation_probability=0.1)
             ],
             popsize=100,
             elitist=True,
@@ -135,6 +138,30 @@ class RLTrainer:
     def _setup_hooks(self):
         self.searcher.before_step_hook.append(self.check_metrics)
         self.searcher.after_step_hook.append(self.run_current_top_models)
+        self.searcher.before_step_hook.append(self.before_epoch_hook)
+        self.searcher.after_step_hook.append(self.after_epoch_hook)
+
+    def before_epoch_hook(self):
+        """Hook to execute before each epoch starts."""
+        self.epoch_start_time = time.time()  # Start timer
+
+    def after_epoch_hook(self)->{}:
+        """Hook to execute after each epoch ends."""
+        try:
+            time_eval={}
+            self.epoch_end_time = time.time()  # End timer
+            elapsed_time = self.epoch_end_time - self.epoch_start_time
+            time_eval['elapsed_time'] = elapsed_time  # Log elapsed time
+            print(f"Epoch {self.current_iteration}: Elapsed time: {elapsed_time:.2f} seconds")
+
+            # Call the existing hooks
+            self.check_metrics()
+            evals=self.run_current_top_models()
+            return {**evals,**time_eval}
+
+        except Exception as e:
+            print(f"Error in after_epoch_hook: {e}")
+        return {}
 
     def check_metrics(self):
         try:
@@ -205,9 +232,9 @@ class RLTrainer:
         avg_steps = sum(total_steps) / len(total_steps)
         return avg_reward, avg_steps
 
-    def run_current_top_models(self):
+    def run_current_top_models(self)->dict:
         if self.current_iteration <= self.save_weights_after_iter:
-            return
+            return {}
 
         try:
             evals = {}
@@ -220,16 +247,17 @@ class RLTrainer:
                 pop_best = self.current_performer["pop_best"]
                 evals['pop_best_current_reward'], evals['pop_best_current_steps'] = self.evaluate_and_record(pop_best, f"{self.folder_name}/pop_best_current", self.current_iteration)
 
-            # models = self.searcher.ensembled_models
+            models = self.searcher.ensembled_models
             #
-            # if len(models) > 0:
-            #     ensemble_policy = Ensemble(models)
-            #     evals['ensemble_reward'], evals['ensemble_steps'] = self.evaluate_and_record(ensemble_policy, f"{self.folder_name}/ensemble_records", self.current_iteration)
+            if len(models) > 0:
+                ensemble_policy = Ensemble(models)
+                evals['ensemble_reward'], evals['ensemble_steps'] = self.evaluate_and_record(ensemble_policy, f"{self.folder_name}/ensemble_records", self.current_iteration)
 
             return evals
 
         except Exception as e:
             print(f"Error in run_current_top_models: {e}")
+        return {}
 
     def train(self, num_iterations):
         print("Starting training...")
@@ -241,5 +269,5 @@ class RLTrainer:
 # Main execution
 if __name__ == "__main__":
     trainer = RLTrainer(env_name="LunarLander-v3", save_weights_after_iter=400)
-    final_policy = trainer.train(num_iterations=600)
+    final_policy = trainer.train(num_iterations=700)
     print("Training completed.")

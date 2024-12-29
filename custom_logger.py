@@ -15,7 +15,8 @@ class CSVLogger(Logger):
             'iteration', 'pop_best_eval', 'mean_eval', 'median_eval',
             'best_eval', 'worst_eval', 'total_interaction_count',
             'total_episode_count', 'ensembled_reward','best_current_reward','pop_best_current_reward',
-            'ensembled_steps', 'best_current_steps', 'pop_best_current_steps'
+            'ensembled_steps', 'best_current_steps', 'pop_best_current_steps',
+            'elapsed_time'
         ]
         with open(self.filename, 'w', newline='') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=self.fieldnames)
@@ -40,6 +41,8 @@ class CSVLogger(Logger):
 
             'best_current_reward': status.get('best_current_reward', 0),
             'best_current_steps': status.get('best_current_steps', 0),
+
+            'elapsed_time': status.get('elapsed_time', 0),
 
 
 

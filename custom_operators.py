@@ -4,22 +4,183 @@ from src.evotorch.operators import CopyingOperator,Operator,CrossOver
 from src.evotorch.core import  SolutionBatch,Optional
 from src.evotorch.core import Problem
 
+
+
+import torch
+from evotorch.operators import CopyingOperator
+from evotorch import SolutionBatch
+
+import torch
+from src.evotorch.operators import CrossOver
+from src.evotorch import SolutionBatch
+
+class GreedyCrossover(CrossOver):
+    def __init__(self, problem,tournament_size=5, top_n=2, num_children=20, crossover_strategy=None):
+        """
+        Args:
+            problem: The problem being solved.
+            top_n: Number of top solutions to preserve (elitism).
+            num_children: Number of children to generate.
+            solution_length: Length of each solution (dimensionality).
+            crossover_strategy: A callable for the crossover strategy. If None, defaults to single-point crossover.
+        """
+        super().__init__(problem,tournament_size=tournament_size)
+        self.top_n = top_n
+        self.num_children = num_children
+
+        self.crossover_strategy = crossover_strategy or self.two_point_crossover
+
+    def _do(self, batch: SolutionBatch) -> SolutionBatch:
+        """
+        Main method to perform the crossover operation.
+
+        Args:
+            batch: The input population as a SolutionBatch.
+
+        Returns:
+            A new SolutionBatch with the offspring replacing the worst solutions.
+        """
+        parents1, parents2,sorted_batch = self._make_tournament_and_selection(batch)
+        if len(parents1) != len(parents2):
+            raise ValueError(
+                f"_make_tournament_and_selection() returned parents1 and parents2 with incompatible sizes. "
+                f"len(parents1): {len(parents1)}; len(parents2): {len(parents2)}."
+            )
+        offspring = self._do_cross_over(parents1, parents2)
+        return self._replace_worst(batch, offspring,sorted_batch)
+
+    def _make_tournament_and_selection(self, batch: SolutionBatch):
+        """
+        Select parents greedily based on evaluation scores.
+
+        Args:
+            batch: The input population as a SolutionBatch.
+
+        Returns:
+            parents1, parents2: Two groups of selected parents for crossover.
+        """
+        # Step 1: Evaluate and sort the population
+        evals = batch.utility()  # Get evaluation scores
+        sorted_indices = torch.argsort(evals, descending=True)  # Higher is better
+        sorted_batch = batch[sorted_indices]
+
+        # Step 2: Select parents greedily
+        parents1 = sorted_batch[:self.num_children // 2]._data
+        parents2 = sorted_batch[1:self.num_children // 2 + 1]._data  # Shifted pairing
+
+        return parents1, parents2,sorted_batch
+
+    def _do_cross_over(self, parents1: torch.Tensor, parents2: torch.Tensor) -> torch.Tensor:
+        """
+        Perform crossover using the selected strategy.
+
+        Args:
+            parents1: The first half of the parents.
+            parents2: The second half of the parents.
+
+        Returns:
+            A tensor containing the offspring.
+        """
+        return self.crossover_strategy(parents1, parents2)
+    def two_point_crossover(self, parents1: torch.Tensor, parents2: torch.Tensor,eta=0.2) -> torch.Tensor:
+        # Generate u_i values which determine the spread
+        u = self.problem.make_uniform_shaped_like(parents1)
+
+        # Compute beta_i values from u_i values as the actual spread per dimension
+        betas = (2 * u).pow(1.0 / (eta + 1.0))  # Compute all values for u_i < 0.5 first
+        betas[u > 0.5] = (1.0 / (2 * (1.0 - u[u > 0.5]))).pow(
+            1.0 / (eta + 1.0)
+        )  # Replace the values for u_i >= 0.5
+        children1 = 0.5 * (
+            (1 + betas) * parents1 + (1 - betas) * parents2
+        )  # Create the first set of children from the beta values
+        children2 = 0.5 * (
+            (1 + betas) * parents2 + (1 - betas) * parents1
+        )  # Create the second set of children as a mirror of the first set of children
+
+        # Combine the children tensors in one big tensor
+        children = torch.cat([children1, children2], dim=0)
+
+        # Respect the lower and upper bounds defined by the problem object
+        children = self._respect_bounds(children)
+
+        return children
+
+    def _single_point_crossover(self, parents1: torch.Tensor, parents2: torch.Tensor) -> torch.Tensor:
+        """
+        Default single-point crossover strategy.
+
+        Args:
+            parents1: The first half of the parents.
+            parents2: The second half of the parents.
+
+        Returns:
+            A tensor containing the offspring.
+        """
+        num_children = parents1.size(0) * 2
+        solution_length = parents1.size(1)
+        device = parents1.device
+
+        child_values = torch.empty((num_children, solution_length), device=device)
+
+        for i in range(parents1.size(0)):
+            crossover_point = torch.randint(1, solution_length, (1,)).item()
+
+            # Generate two children per pair
+            child_values[2 * i, :crossover_point] = parents1[i, :crossover_point]
+            child_values[2 * i, crossover_point:] = parents2[i, crossover_point:]
+            child_values[2 * i + 1, :crossover_point] = parents2[i, :crossover_point]
+            child_values[2 * i + 1, crossover_point:] = parents1[i, crossover_point:]
+
+        return child_values
+
+    def _replace_worst(self, batch: SolutionBatch, offspring: torch.Tensor,sorted_batch:SolutionBatch) -> SolutionBatch:
+        """
+        Replace the worst solutions in the population with the offspring.
+
+        Args:
+            batch: The input population as a SolutionBatch.
+            offspring: A tensor containing the offspring.
+
+        Returns:
+            A new SolutionBatch with the worst solutions replaced.
+        """
+        offspring_batch = self._make_children_batch(offspring)
+
+
+        # Step 2: Extract the preserved top N solutions
+        preserved_solutions = sorted_batch[:self.top_n]._data
+
+        # Step 3: Replace the worst solutions with offspring
+        # Combine preserved solutions and offspring
+        combined_solutions = torch.cat([preserved_solutions, offspring_batch._data], dim=0)
+
+        # Step 4: Fill the remaining slots with other solutions from the sorted batch
+        remaining_solutions = sorted_batch[self.top_n + len(offspring_batch):]._data
+        num_remaining_slots = len(batch) - len(combined_solutions)
+        if num_remaining_slots > 0:
+            combined_solutions = torch.cat(
+                [combined_solutions, remaining_solutions[:num_remaining_slots]], dim=0
+            )
+        return self._make_children_batch(combined_solutions)
+
+
+    def _make_children_batch(self, child_values: torch.Tensor) -> SolutionBatch:
+        """
+        Convert a tensor of offspring into a SolutionBatch.
+
+        Args:
+            child_values: A tensor containing the offspring.
+
+        Returns:
+            A SolutionBatch containing the offspring.
+        """
+        result = SolutionBatch(self.problem, device=child_values.device, empty=True, popsize=child_values.shape[0])
+        result._data = child_values
+        return result
+
+
 # Custom TournamentSelection
-class CustomTournamentSelection(CopyingOperator):
-    def __init__(self, problem:Problem,tournament_size=3):
-        super().__init__(problem=problem)  # No specific problem is required for selection
-        self.tournament_size = tournament_size
-
-    def _do(self, population):
-        selected = []
-        pop_size = len(population)
-
-        for _ in range(pop_size):  # Perform selection for the entire population
-            competitors = random.sample(population, self.tournament_size)
-            best = max(competitors, key=lambda ind: ind.evaluation)  # Choose the best individual
-            selected.append(best)
-
-        return selected
 
 
 
