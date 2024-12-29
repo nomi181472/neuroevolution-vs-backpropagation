@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12d5defd-f5d1-4f3c-8ad1-07788da3e23b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/sample5-cma-map.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sample5-map_elites.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/custom_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/custom_operators.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_operators.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/LunarLander-v3/status_log.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/LunarLander-v3/status_log.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample2-record.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample3-custom-neuro.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample3-custom.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample3-modular.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample5-ga.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample5-ga.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,6 +136,10 @@
           <url>file://$PROJECT_DIR$/src/evotorch/operators/base.py</url>
           <line>405</line>
           <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sample5-map_elites.py</url>
+          <option name="timeStamp" value="61" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
