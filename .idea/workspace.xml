@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12d5defd-f5d1-4f3c-8ad1-07788da3e23b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/sample5-ga.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/custom_operators.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/need_ga.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/LunarLander-v3/status_log.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/LunarLander-v3/status_log.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample5-ga.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample5-ga.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +45,7 @@
     "Python.cosyne.executor": "Debug",
     "Python.cosyne_neuro.executor": "Run",
     "Python.custom_logger.executor": "Run",
+    "Python.custom_operators.executor": "Run",
     "Python.decorators.executor": "Run",
     "Python.ensemble_model.executor": "Run",
     "Python.ga.executor": "Run",
@@ -54,6 +58,7 @@
     "Python.sample3-custom.executor": "Debug",
     "Python.sample3-modular.executor": "Debug",
     "Python.sample4-ensemble.executor": "Debug",
+    "Python.sample5-ga.executor": "Debug",
     "Python.searchalgorithm.executor": "Debug",
     "Python.supervisedneuroevolution.executor": "Run",
     "Python.test_env.executor": "Run",
@@ -122,6 +127,26 @@
           <url>file://$PROJECT_DIR$/need.py</url>
           <line>176</line>
           <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/custom_operators.py</url>
+          <line>13</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/custom_operators.py</url>
+          <line>9</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/evotorch/operators/base.py</url>
+          <line>265</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/evotorch/operators/base.py</url>
+          <line>405</line>
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
