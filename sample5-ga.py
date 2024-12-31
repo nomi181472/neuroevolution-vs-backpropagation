@@ -82,6 +82,7 @@ class RLTrainer:
         self.weights_path = f"{self.folder_name}/weights"
         self.current_iteration = 0
         self.current_performer = {}
+        self.repertoire = {}
 
         self._initialize_directories()
         self.problem = self._create_problem(env_name)
@@ -122,22 +123,9 @@ class RLTrainer:
             _allow_empty_operator_list=True,
         )
 
-    # return Need(
-    #     self.problem,
-    #     popsize=100,
-    #     num_elites=4,
-    #     tournament_size=10,
-    #     mutation_stdev=0.3,
-    #     mutation_probability=0.5,
-    #     permute_all=True,
-    #     n_ensemble=5
-    #
-    # )
-
-
     def _setup_hooks(self):
-        self.searcher.before_step_hook.append(self.check_metrics)
-        self.searcher.after_step_hook.append(self.run_current_top_models)
+        #self.searcher.before_step_hook.append(self.check_metrics)
+        #self.searcher.after_step_hook.append(self.run_current_top_models)
         self.searcher.before_step_hook.append(self.before_epoch_hook)
         self.searcher.after_step_hook.append(self.after_epoch_hook)
 
@@ -156,8 +144,9 @@ class RLTrainer:
 
             # Call the existing hooks
             self.check_metrics()
-            evals=self.run_current_top_models()
-            return {**evals,**time_eval}
+            #evals=self.run_current_top_models()
+            self.calculate_qd_metrics()
+            return {**time_eval}
 
         except Exception as e:
             print(f"Error in after_epoch_hook: {e}")
@@ -198,6 +187,17 @@ class RLTrainer:
             torch.save(current_policy.state_dict(), file_name)
             self.metrics[metric_name] = current_score
             print(f"Saved weights to {file_name}")
+
+    def calculate_qd_metrics(self):
+        """Calculate Quality Diversity (QD) metrics."""
+        fitness_values = [entry['fitness'] for entry in self.repertoire.values() if entry['fitness'] > -np.inf]
+
+
+        coverage = len(fitness_values)               # Number of filled niches
+        qd_score = sum(fitness_values)               # Sum of fitness values across all niches
+
+        print(f"QD Metrics - , Coverage: {coverage}, QD Score: {qd_score}")
+        #self.logger.(f"QD Metrics , Coverage: {coverage}, QD Score: {qd_score}")
 
     @torch.no_grad()
     def evaluate_and_record(self, policy, save_path, iteration):

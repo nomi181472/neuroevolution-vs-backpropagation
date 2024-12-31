@@ -411,6 +411,7 @@ class GymNE(NEProblem):
                     if k not in final_info:
                         final_info[k] = info[k]
 
+
                 return final_info
 
     @property
