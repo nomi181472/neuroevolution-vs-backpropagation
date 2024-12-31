@@ -16,7 +16,7 @@ from src.evotorch.operators import GaussianMutation
 from custom_operators import GreedyCrossover, MultiPointCrossOver
 from src.evotorch.operators import TwoPointCrossOver
 from ensemble_model import Ensemble
-
+from linear_policy import LinearPolicy
 # Utility functions
 class Utils:
     @staticmethod
@@ -35,31 +35,6 @@ class Utils:
             os.makedirs(path)
 
 # Neural Network Policy
-@pass_info
-class LinearPolicy(nn.Module):
-    def __init__(self, obs_length, act_length, num_layers=2, neurons=8, bias=True, **kwargs):
-        super().__init__()
-
-        layers = []
-        input_size = obs_length
-
-        if num_layers == 1:
-            layers.append(nn.Linear(input_size, act_length, bias=bias))
-        else:
-            for _ in range(num_layers - 1):
-                layers.append(nn.Linear(input_size, neurons, bias=bias))
-                layers.append(nn.ReLU())
-                input_size = neurons
-
-            layers.append(nn.Linear(input_size, act_length, bias=bias))
-
-        self.layers = nn.ModuleList(layers)
-
-    def forward(self, obs):
-        x = obs
-        for layer in self.layers:
-            x = layer(x)
-        return x
 
 # RL Trainer
 class RLTrainer:
@@ -97,20 +72,24 @@ class RLTrainer:
         Utils.create_directory(self.folder_name)
         Utils.create_directory(self.weights_path)
 
-    def _create_problem(self, env_name):
+    def _create_problem(self, env_name, num_layers=2, neurons=8):
+        """
+        Create a problem with the specified number of layers and neurons.
+        """
+
         def create_env():
             env = gym.make(self.env_name, render_mode="rgb_array")
-            env = gym.wrappers.RecordVideo(env,video_folder= f"{self.folder_name}/recordings",name_prefix="video", episode_trigger=lambda ep: ep%100==0)
+            env = gym.wrappers.RecordVideo(env, video_folder=f"{self.folder_name}/recordings", name_prefix="video",
+                                           episode_trigger=lambda ep: ep % 100 == 0)
             return env
 
         return GymNE(
             env=create_env,
             network=LinearPolicy,
-            network_args={'bias': True},
+            network_args={'bias': True, 'num_layers': num_layers, 'neurons': neurons},
             num_actors='max',
             observation_normalization=True,
         )
-
     def _create_searcher(self):
         return Need(
             self.problem,
@@ -134,6 +113,56 @@ class RLTrainer:
         """Hook to execute before each epoch starts."""
         self.epoch_start_time = time.time()  # Start timer
 
+    def grid_search(self, layer_options, neuron_options, num_iterations):
+        """
+        Perform grid search over combinations of layers and neurons.
+
+        Args:
+            layer_options (list): List of numbers of layers to try.
+            neuron_options (list): List of numbers of neurons to try.
+            num_iterations (int): Number of iterations for training each configuration.
+        """
+        best_config = None
+        best_performance = float('-inf')
+        results = []
+
+        for num_layers in layer_options:
+            for num_neurons in neuron_options:
+                print(f"\nTesting configuration: layers={num_layers}, neurons={num_neurons}")
+                # Update the problem definition with the new parameters
+                self.problem = self._create_problem(
+                    self.env_name,
+                    num_layers=num_layers,
+                    neurons=num_neurons
+                )
+                self.searcher = self._create_searcher()
+
+                # Train the model
+                final_policy = self.train(num_iterations)
+
+                # Evaluate the performance (you can define how to measure performance)
+                best_solution = self.searcher.status["best"]
+                final_policy = self.problem.to_policy(best_solution)
+                eval_score, _ = self.evaluate_and_record(
+                    final_policy, save_path=self.weights_path, iteration=self.current_iteration
+                )
+                print(f"Configuration layers={num_layers}, neurons={num_neurons} -> Score: {eval_score}")
+
+                # Save results
+                results.append({
+                    "layers": num_layers,
+                    "neurons": num_neurons,
+                    "score": eval_score
+                })
+
+                # Update the best configuration
+                if eval_score > best_performance:
+                    best_performance = eval_score
+                    best_config = (num_layers, num_neurons)
+
+        print(f"\nBest configuration: layers={best_config[0]}, neurons={best_config[1]} with score {best_performance}")
+        return results
+
     def after_epoch_hook(self)->{}:
         """Hook to execute after each epoch ends."""
         try:
@@ -142,12 +171,14 @@ class RLTrainer:
             elapsed_time = self.epoch_end_time - self.epoch_start_time
             time_eval['elapsed_time'] = elapsed_time  # Log elapsed time
             print(f"Epoch {self.current_iteration}: Elapsed time: {elapsed_time:.2f} seconds")
+            sol = copy.deepcopy(self.searcher.status["best"])
+            total_params=self.problem.parameterize_net(sol.access_values()).calculate_total_parameters()
 
             # Call the existing hooks
             self.check_metrics()
             #evals=self.run_current_top_models()
             #self.calculate_qd_metrics()
-            return {**time_eval}
+            return {**time_eval, "total_params":total_params}
 
         except Exception as e:
             print(f"Error in after_epoch_hook: {e}")
@@ -269,6 +300,11 @@ class RLTrainer:
 
 # Main execution
 if __name__ == "__main__":
-    trainer = RLTrainer(env_name="LunarLander-v3", save_weights_after_iter=400)
-    final_policy = trainer.train(num_iterations=700)
-    print("Training completed.")
+    trainer = RLTrainer(env_name="LunarLander-v3", save_weights_after_iter=300)
+
+
+
+    # Perform grid search
+    results = trainer.train( num_iterations=1000)
+
+
