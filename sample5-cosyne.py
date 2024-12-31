@@ -7,7 +7,7 @@ from torch import nn
 import random
 import numpy as np
 from src.evotorch.algorithms import GeneticAlgorithm
-from need_ga import NeedGA
+from need import Need
 from src.evotorch.logging import StdOutLogger
 from src.evotorch.neuroevolution import GymNE
 from evotorch.decorators import pass_info
@@ -112,17 +112,16 @@ class RLTrainer:
         )
 
     def _create_searcher(self):
-        return NeedGA(
+        return Need(
             self.problem,
-            operators=[
-                GreedyCrossover(problem=self.problem,top_n=3,num_children=40,),
-                GaussianMutation(problem=self.problem, stdev=0.1, mutation_probability=0.1)
-            ],
             popsize=100,
-            elitist=True,
-            re_evaluate=True,
-            re_evaluate_parents_first=True,
-            _allow_empty_operator_list=True,
+            num_elites=2,
+            tournament_size=10,
+            mutation_stdev=0.2,
+            mutation_probability=0.4,
+            permute_all=True,
+            n_ensemble=5
+
         )
 
     def _setup_hooks(self):

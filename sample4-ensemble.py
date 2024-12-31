@@ -195,10 +195,10 @@ class RLTrainer:
         return Need(
             self.problem,
             popsize=100,
-            num_elites=4,
+            num_elites=2,
             tournament_size=10,
-            mutation_stdev=0.3,
-            mutation_probability=0.5,
+            mutation_stdev=0.2,
+            mutation_probability=0.4,
             permute_all=True,
             n_ensemble=5
 

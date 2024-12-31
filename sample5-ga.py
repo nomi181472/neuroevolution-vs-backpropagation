@@ -99,7 +99,9 @@ class RLTrainer:
 
     def _create_problem(self, env_name):
         def create_env():
-            return gym.make(env_name)
+            env = gym.make(self.env_name, render_mode="rgb_array")
+            env = gym.wrappers.RecordVideo(env,video_folder= f"{self.folder_name}/recordings",name_prefix="video", episode_trigger=lambda ep: ep%100==0)
+            return env
 
         return GymNE(
             env=create_env,
@@ -145,7 +147,7 @@ class RLTrainer:
             # Call the existing hooks
             self.check_metrics()
             #evals=self.run_current_top_models()
-            self.calculate_qd_metrics()
+            #self.calculate_qd_metrics()
             return {**time_eval}
 
         except Exception as e:
