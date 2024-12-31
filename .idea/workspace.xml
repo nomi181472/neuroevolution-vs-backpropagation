@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12d5defd-f5d1-4f3c-8ad1-07788da3e23b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/sample5-map_elites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample5-map_elites.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sample5-pgap.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sample5-pgpa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/LunarLander-v3/status_log.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/LunarLander-v3/status_log.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
