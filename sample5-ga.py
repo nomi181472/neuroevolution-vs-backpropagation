@@ -270,6 +270,6 @@ class RLTrainer:
 
 # Main execution
 if __name__ == "__main__":
-    trainer = RLTrainer(env_name="LunarLander-v3", save_weights_after_iter=400)
-    final_policy = trainer.train(num_iterations=700)
+    trainer = RLTrainer(env_name="LunarLander-v3", save_weights_after_iter=1000)
+    final_policy = trainer.train(num_iterations=1000)
     print("Training completed.")
