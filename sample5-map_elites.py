@@ -1,3 +1,4 @@
+
 import os
 import copy
 import gymnasium as gym
@@ -6,23 +7,19 @@ import time
 from torch import nn
 import random
 import numpy as np
+from src.evotorch.algorithms import GeneticAlgorithm
 from src.evotorch.algorithms import MAPElites
-from need_ga import NeedGA
-from need import Need
 from src.evotorch.logging import StdOutLogger
 from src.evotorch.neuroevolution import GymNE
 from evotorch.decorators import pass_info
 from custom_logger import CSVLogger
-from src.evotorch.operators import GaussianMutation,OnePointCrossOver
+from src.evotorch.operators import GaussianMutation
 from custom_operators import GreedyCrossover, MultiPointCrossOver
-from src.evotorch.operators import TwoPointCrossOver
+from src.evotorch.operators import OnePointCrossOver
 from ensemble_model import Ensemble
-
+from linear_policy import LinearPolicy
 # Utility functions
 class Utils:
-    @staticmethod
-    def get_device():
-        return torch.device("cuda" if torch.cuda.is_available() else "cpu")
     @staticmethod
     def set_seed(seed):
         """Set the random seed for reproducibility."""
@@ -39,31 +36,6 @@ class Utils:
             os.makedirs(path)
 
 # Neural Network Policy
-@pass_info
-class LinearPolicy(nn.Module):
-    def __init__(self, obs_length, act_length, num_layers=2, neurons=8, bias=True, **kwargs):
-        super().__init__()
-
-        layers = []
-        input_size = obs_length
-
-        if num_layers == 1:
-            layers.append(nn.Linear(input_size, act_length, bias=bias))
-        else:
-            for _ in range(num_layers - 1):
-                layers.append(nn.Linear(input_size, neurons, bias=bias))
-                layers.append(nn.ReLU())
-                input_size = neurons
-
-            layers.append(nn.Linear(input_size, act_length, bias=bias))
-
-        self.layers = nn.ModuleList(layers)
-
-    def forward(self, obs):
-        x = obs
-        for layer in self.layers:
-            x = layer(x)
-        return x
 
 # RL Trainer
 class RLTrainer:
@@ -86,6 +58,7 @@ class RLTrainer:
         self.weights_path = f"{self.folder_name}/weights"
         self.current_iteration = 0
         self.current_performer = {}
+        self.repertoire = {}
 
         self._initialize_directories()
         self.problem = self._create_problem(env_name)
@@ -100,14 +73,21 @@ class RLTrainer:
         Utils.create_directory(self.folder_name)
         Utils.create_directory(self.weights_path)
 
-    def _create_problem(self, env_name):
+    def _create_problem(self, env_name, num_layers=2, neurons=8):
+        """
+        Create a problem with the specified number of layers and neurons.
+        """
+
         def create_env():
-            return gym.make(env_name)
+            env = gym.make(self.env_name, render_mode="rgb_array")
+            env = gym.wrappers.RecordVideo(env, video_folder=f"{self.folder_name}/recordings", name_prefix="video",
+                                           episode_trigger=lambda ep: ep % 100 == 0)
+            return env
 
         return GymNE(
             env=create_env,
             network=LinearPolicy,
-            network_args={'bias': True},
+            network_args={'bias': True, 'num_layers': num_layers, 'neurons': neurons},
             num_actors='max',
             observation_normalization=True,
         )
@@ -116,21 +96,21 @@ class RLTrainer:
         feature_grid = MAPElites.make_feature_grid(
             lower_bounds=[-10, -10],  # Lower bounds for features
             upper_bounds=[10, 10],  # Upper bounds for features
-            num_bins=torch.tensor([5,5]),  # Number of bins for each feature
+            num_bins=torch.tensor([5, 5]),  # Number of bins for each feature
             dtype=torch.float32,
             device=Utils.get_device()  # Use the best available device
         )
-        return  MAPElites(
-        self.problem,
+        return MAPElites(
+            self.problem,
             feature_grid=feature_grid,
             re_evaluate=True,
-           operators=[ OnePointCrossOver(problem=self.problem,tournament_size=10),
-                    GaussianMutation(problem=self.problem, stdev=0.2)]  # Mutation strength Initial solution
-    )
+            operators=[OnePointCrossOver(problem=self.problem, tournament_size=10),
+                       GaussianMutation(problem=self.problem, stdev=0.2)]  # Mutation strength Initial solution
+        )
         return NeedGA(
             self.problem,
             operators=[
-                GreedyCrossover(problem=self.problem,top_n=3,num_children=40,),
+                GreedyCrossover(problem=self.problem, top_n=3, num_children=40, ),
                 GaussianMutation(problem=self.problem, stdev=0.1, mutation_probability=0.1)
             ],
             popsize=100,
@@ -152,16 +132,65 @@ class RLTrainer:
 
         )
 
-
     def _setup_hooks(self):
-        self.searcher.before_step_hook.append(self.check_metrics)
-        self.searcher.after_step_hook.append(self.run_current_top_models)
+        #self.searcher.before_step_hook.append(self.check_metrics)
+        #self.searcher.after_step_hook.append(self.run_current_top_models)
         self.searcher.before_step_hook.append(self.before_epoch_hook)
         self.searcher.after_step_hook.append(self.after_epoch_hook)
 
     def before_epoch_hook(self):
         """Hook to execute before each epoch starts."""
         self.epoch_start_time = time.time()  # Start timer
+
+    def grid_search(self, layer_options, neuron_options, num_iterations):
+        """
+        Perform grid search over combinations of layers and neurons.
+
+        Args:
+            layer_options (list): List of numbers of layers to try.
+            neuron_options (list): List of numbers of neurons to try.
+            num_iterations (int): Number of iterations for training each configuration.
+        """
+        best_config = None
+        best_performance = float('-inf')
+        results = []
+
+        for num_layers in layer_options:
+            for num_neurons in neuron_options:
+                print(f"\nTesting configuration: layers={num_layers}, neurons={num_neurons}")
+                # Update the problem definition with the new parameters
+                self.problem = self._create_problem(
+                    self.env_name,
+                    num_layers=num_layers,
+                    neurons=num_neurons
+                )
+                self.searcher = self._create_searcher()
+
+                # Train the model
+                final_policy = self.train(num_iterations)
+
+                # Evaluate the performance (you can define how to measure performance)
+                best_solution = self.searcher.status["best"]
+                final_policy = self.problem.to_policy(best_solution)
+                eval_score, _ = self.evaluate_and_record(
+                    final_policy, save_path=self.weights_path, iteration=self.current_iteration
+                )
+                print(f"Configuration layers={num_layers}, neurons={num_neurons} -> Score: {eval_score}")
+
+                # Save results
+                results.append({
+                    "layers": num_layers,
+                    "neurons": num_neurons,
+                    "score": eval_score
+                })
+
+                # Update the best configuration
+                if eval_score > best_performance:
+                    best_performance = eval_score
+                    best_config = (num_layers, num_neurons)
+
+        print(f"\nBest configuration: layers={best_config[0]}, neurons={best_config[1]} with score {best_performance}")
+        return results
 
     def after_epoch_hook(self)->{}:
         """Hook to execute after each epoch ends."""
@@ -171,11 +200,14 @@ class RLTrainer:
             elapsed_time = self.epoch_end_time - self.epoch_start_time
             time_eval['elapsed_time'] = elapsed_time  # Log elapsed time
             print(f"Epoch {self.current_iteration}: Elapsed time: {elapsed_time:.2f} seconds")
+            sol = copy.deepcopy(self.searcher.status["best"])
+            total_params=self.problem.parameterize_net(sol.access_values()).calculate_total_parameters()
 
             # Call the existing hooks
             self.check_metrics()
-            evals=self.run_current_top_models()
-            return {**evals,**time_eval}
+            #evals=self.run_current_top_models()
+            #self.calculate_qd_metrics()
+            return {**time_eval, "total_params":total_params}
 
         except Exception as e:
             print(f"Error in after_epoch_hook: {e}")
@@ -216,6 +248,17 @@ class RLTrainer:
             torch.save(current_policy.state_dict(), file_name)
             self.metrics[metric_name] = current_score
             print(f"Saved weights to {file_name}")
+
+    def calculate_qd_metrics(self):
+        """Calculate Quality Diversity (QD) metrics."""
+        fitness_values = [entry['fitness'] for entry in self.repertoire.values() if entry['fitness'] > -np.inf]
+
+
+        coverage = len(fitness_values)               # Number of filled niches
+        qd_score = sum(fitness_values)               # Sum of fitness values across all niches
+
+        print(f"QD Metrics - , Coverage: {coverage}, QD Score: {qd_score}")
+        #self.logger.(f"QD Metrics , Coverage: {coverage}, QD Score: {qd_score}")
 
     @torch.no_grad()
     def evaluate_and_record(self, policy, save_path, iteration):
@@ -286,6 +329,15 @@ class RLTrainer:
 
 # Main execution
 if __name__ == "__main__":
-    trainer = RLTrainer(env_name="LunarLander-v3", save_weights_after_iter=400)
-    final_policy = trainer.train(num_iterations=700)
-    print("Training completed.")
+    trainer = RLTrainer(env_name="LunarLander-v3", save_weights_after_iter=300)
+
+
+
+    # Perform grid search
+    results = trainer.train( num_iterations=1000)
+
+
+
+
+
+
