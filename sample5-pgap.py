@@ -93,13 +93,11 @@ class RLTrainer:
     def _create_searcher(self):
         return PGPE(
             self.problem,
-            popsize=200,
+            popsize=100,
             center_learning_rate=0.01125,
             stdev_learning_rate=0.1,
             optimizer_config={"max_speed": 0.015},
-            radius_init=0.27,
-            num_interactions=150000,
-            popsize_max=3200,
+            radius_init=0.27
         )
 
     def _setup_hooks(self):
